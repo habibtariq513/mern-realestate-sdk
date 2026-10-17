@@ -1,0 +1,30 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      description: "REST API for managing property listings, multi-parameter search filtering, and user profiles in the MERN Real Estate Marketplace."
+      license: {
+        name: "MIT"
+      }
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Bearer"
+        scheme: "bearerAuth"
+        type: "http"
+      }
+      servers: [
+        {
+          description: "API Server"
+          url: "http://localhost:3000/api"
+        }
+      ]
+      summary: "REST API for managing property listings, multi-parameter search filtering, and user profiles in the MERN Real Estate Marketplace."
+      title: "MERN Real Estate Marketplace API"
+      version: "1.0.0"
+    }
+  }
+}
+

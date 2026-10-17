@@ -1,0 +1,398 @@
+# Entity: listing
+
+main: kit: entity: listing: {
+
+  alias: field: {}
+
+  fields: {
+    address: {
+      h: "Address"
+      n: "address"
+      r: true
+      t: "`$STRING`"
+    }
+    bathrooms: {
+      h: "Bathrooms"
+      n: "bathrooms"
+      r: true
+      t: "`$INTEGER`"
+    }
+    bedrooms: {
+      h: "Bedrooms"
+      n: "bedrooms"
+      r: true
+      t: "`$INTEGER`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: true
+      t: "`$STRING`"
+    }
+    discountPrice: {
+      h: "Discount Price"
+      n: "discountPrice"
+      r: false
+      t: "`$NUMBER`"
+    }
+    furnished: {
+      h: "Furnished"
+      n: "furnished"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: true
+      t: "`$STRING`"
+    }
+    imageUrls: {
+      h: "Image Urls"
+      n: "imageUrls"
+      r: true
+      t: "`$ARRAY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    offer: {
+      h: "Offer"
+      n: "offer"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    parking: {
+      h: "Parking"
+      n: "parking"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    regularPrice: {
+      h: "Regular Price"
+      n: "regularPrice"
+      r: true
+      t: "`$NUMBER`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: true
+      t: "`$STRING`"
+    }
+    userRef: {
+      h: "User Ref"
+      n: "userRef"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "listing"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          bf: [
+            "address"
+            "bathrooms"
+            "bedrooms"
+            "description"
+            "discountPrice"
+            "furnished"
+            "imageUrls"
+            "name"
+            "offer"
+            "parking"
+            "regularPrice"
+            "type"
+            "userRef"
+          ]
+          co: {
+            id: "POST /listings"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/listings"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "listings"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /listings"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "furnished"
+                or: "furnished"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: 9
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "offer"
+                or: "offer"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: "desc"
+                k: "query"
+                n: "order"
+                or: "order"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "parking"
+                or: "parking"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "search_term"
+                or: "searchTerm"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "createdAt"
+                k: "query"
+                n: "sort"
+                or: "sort"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "start_index"
+                or: "startIndex"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "type"
+                or: "type"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/listings"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "listings"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /listings/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/listings/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "listings"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /listings/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/listings/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "listings"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          bf: [
+            "address"
+            "bathrooms"
+            "bedrooms"
+            "description"
+            "discountPrice"
+            "furnished"
+            "imageUrls"
+            "name"
+            "offer"
+            "parking"
+            "regularPrice"
+            "type"
+            "userRef"
+          ]
+          co: {
+            id: "PUT /listings/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/listings/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "listings"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

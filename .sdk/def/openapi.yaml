@@ -1,0 +1,375 @@
+openapi: 3.0.3
+info:
+  title: MERN Real Estate Marketplace API
+  version: 1.0.0
+  description: >-
+    REST API for managing property listings, multi-parameter search filtering,
+    and user profiles in the MERN Real Estate Marketplace.
+  license:
+    name: MIT
+servers:
+  - url: http://localhost:3000/api
+    description: API Server
+
+security:
+  - bearerAuth: []
+
+paths:
+  /listings:
+    get:
+      operationId: listListings
+      summary: Search and filter property listings
+      tags:
+        - Listing
+      parameters:
+        - name: searchTerm
+          in: query
+          schema:
+            type: string
+          description: Keyword search across listing names and descriptions
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [all, rent, sale]
+        - name: offer
+          in: query
+          schema:
+            type: boolean
+        - name: parking
+          in: query
+          schema:
+            type: boolean
+        - name: furnished
+          in: query
+          schema:
+            type: boolean
+        - name: sort
+          in: query
+          schema:
+            type: string
+            default: createdAt
+        - name: order
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: desc
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 9
+        - name: startIndex
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Array of matching property listings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Listing'
+    post:
+      operationId: createListing
+      summary: Create a new property listing
+      tags:
+        - Listing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListingInput'
+      responses:
+        '201':
+          description: Created property listing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+
+  /listings/{id}:
+    get:
+      operationId: getListing
+      summary: Load a single property listing by ID
+      tags:
+        - Listing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Property listing details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+    put:
+      operationId: updateListing
+      summary: Update an existing property listing
+      tags:
+        - Listing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListingInput'
+      responses:
+        '200':
+          description: Updated property listing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+    delete:
+      operationId: deleteListing
+      summary: Delete a property listing by ID
+      tags:
+        - Listing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Listing deleted confirmation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+
+  /users/{id}:
+    get:
+      operationId: getUser
+      summary: Get user profile details by ID
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User profile object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      operationId: updateUser
+      summary: Update user profile details
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateInput'
+      responses:
+        '200':
+          description: Updated user profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    delete:
+      operationId: deleteUser
+      summary: Delete a user account
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User account deleted confirmation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Listing:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - address
+        - regularPrice
+        - bedrooms
+        - bathrooms
+        - furnished
+        - parking
+        - type
+        - offer
+        - imageUrls
+        - userRef
+      properties:
+        id:
+          type: string
+          example: 65f1a2b3c4d5e6f7a8b9c0d1
+        name:
+          type: string
+          example: Modern Canal View Villa in DHA Phase 6
+        description:
+          type: string
+          example: Spacious 1-kanal luxury house with solar backup and landscaped lawn.
+        address:
+          type: string
+          example: Sector C, DHA Phase 6, Lahore
+        regularPrice:
+          type: number
+          example: 45000000
+        discountPrice:
+          type: number
+          example: 42500000
+        bathrooms:
+          type: integer
+          example: 6
+        bedrooms:
+          type: integer
+          example: 5
+        furnished:
+          type: boolean
+          example: true
+        parking:
+          type: boolean
+          example: true
+        type:
+          type: string
+          enum: [rent, sale]
+          example: sale
+        offer:
+          type: boolean
+          example: true
+        imageUrls:
+          type: array
+          items:
+            type: string
+        userRef:
+          type: string
+          example: 65f00112233445566778899a
+
+    ListingInput:
+      type: object
+      required:
+        - name
+        - description
+        - address
+        - regularPrice
+        - bedrooms
+        - bathrooms
+        - furnished
+        - parking
+        - type
+        - offer
+        - imageUrls
+        - userRef
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        address:
+          type: string
+        regularPrice:
+          type: number
+        discountPrice:
+          type: number
+        bathrooms:
+          type: integer
+        bedrooms:
+          type: integer
+        furnished:
+          type: boolean
+        parking:
+          type: boolean
+        type:
+          type: string
+          enum: [rent, sale]
+        offer:
+          type: boolean
+        imageUrls:
+          type: array
+          items:
+            type: string
+        userRef:
+          type: string
+
+    User:
+      type: object
+      required:
+        - id
+        - username
+        - email
+      properties:
+        id:
+          type: string
+          example: 65f00112233445566778899a
+        username:
+          type: string
+          example: habibtariq
+        email:
+          type: string
+          format: email
+          example: habib@example.com
+        avatar:
+          type: string
+          example: https://res.cloudinary.com/demo/image/upload/sample.jpg
+
+    UserUpdateInput:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+        avatar:
+          type: string
+
+    StatusResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Operation completed successfully

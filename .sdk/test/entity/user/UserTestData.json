@@ -1,0 +1,54 @@
+{
+  "existing": {
+    "user": {
+      "USER00": {
+        "avatar": "s32",
+        "email": "s33",
+        "id": "USER00",
+        "password": "s35",
+        "username": "s36"
+      },
+      "USER01": {
+        "avatar": "s64",
+        "email": "s65",
+        "id": "USER01",
+        "password": "s67",
+        "username": "s68"
+      },
+      "USER02": {
+        "avatar": "s96",
+        "email": "s97",
+        "id": "USER02",
+        "password": "s99",
+        "username": "s9a"
+      }
+    }
+  },
+  "new": {
+    "user": {
+      "user_ref01": {
+        "avatar": "sc8",
+        "email": "sc9",
+        "password": "scb",
+        "username": "scc"
+      }
+    }
+  },
+  "requests": {
+    "GET /users/{id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /users/{id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /users/{id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

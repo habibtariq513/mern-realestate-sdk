@@ -1,0 +1,100 @@
+{
+  "existing": {
+    "listing": {
+      "LISTING00": {
+        "address": "s8c",
+        "bathrooms": 141,
+        "bedrooms": 142,
+        "description": "s8f",
+        "discountPrice": 144,
+        "furnished": false,
+        "id": "LISTING00",
+        "imageUrls": [],
+        "name": "s94",
+        "offer": false,
+        "parking": true,
+        "regularPrice": 151,
+        "type": "s98",
+        "userRef": "s99"
+      },
+      "LISTING01": {
+        "address": "s118",
+        "bathrooms": 281,
+        "bedrooms": 282,
+        "description": "s11b",
+        "discountPrice": 284,
+        "furnished": false,
+        "id": "LISTING01",
+        "imageUrls": [],
+        "name": "s120",
+        "offer": false,
+        "parking": true,
+        "regularPrice": 291,
+        "type": "s124",
+        "userRef": "s125"
+      },
+      "LISTING02": {
+        "address": "s1a4",
+        "bathrooms": 421,
+        "bedrooms": 422,
+        "description": "s1a7",
+        "discountPrice": 424,
+        "furnished": false,
+        "id": "LISTING02",
+        "imageUrls": [],
+        "name": "s1ac",
+        "offer": false,
+        "parking": true,
+        "regularPrice": 431,
+        "type": "s1b0",
+        "userRef": "s1b1"
+      }
+    }
+  },
+  "new": {
+    "listing": {
+      "listing_ref01": {
+        "address": "s230",
+        "bathrooms": 561,
+        "bedrooms": 562,
+        "description": "s233",
+        "discountPrice": 564,
+        "furnished": false,
+        "imageUrls": [],
+        "name": "s238",
+        "offer": false,
+        "parking": true,
+        "regularPrice": 571,
+        "type": "s23c",
+        "userRef": "s23d"
+      }
+    }
+  },
+  "requests": {
+    "POST /listings": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /listings": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /listings/{id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /listings/{id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PUT /listings/{id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

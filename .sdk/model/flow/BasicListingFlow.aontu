@@ -1,0 +1,100 @@
+# BasicListingFlow
+
+main: kit: flow: BasicListingFlow:
+{
+  entity: "listing",
+  kind: "basic",
+  name: "BasicListingFlow",
+  step: [
+    {
+      i: {
+        ref: "listing_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "listing_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "listing_ref01",
+        srcdatavar: "listing_ref01_data",
+        suffix: "_up0",
+        textfield: "address"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-listing_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "listing_ref01",
+        srcdatavar: "listing_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "listing01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-listing_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "listing_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "listing01"
+      }
+
+      o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "listing_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicListingFlow"
+}

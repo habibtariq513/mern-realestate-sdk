@@ -1,0 +1,21 @@
+{
+  "files": [
+    "SUMMARY.md"
+  ],
+  "config": ".sdk/doc/qa/vale.ini",
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "API Server",
+      "Array of matching property listings",
+      "Created property listing",
+      "Listing deleted confirmation",
+      "Property listing details",
+      "REST API for managing property listings, multi-parameter search filtering, and user profiles in the MERN Real Estate Marketplace.",
+      "Updated property listing",
+      "Updated user profile",
+      "User account deleted confirmation",
+      "User profile object"
+    ]
+  }
+}
